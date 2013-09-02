@@ -5,7 +5,7 @@ var path    = require('path');
 var helpers = require('yeoman-generator').test;
 
 
-describe('commander generator', function () {
+describe('commander generators', function () {
   before(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
       if (err) {
@@ -18,14 +18,13 @@ describe('commander generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files', function (done) {
+  it('commander:app creates expected files', function (done) {
 
       this.app = helpers.createGenerator('commander:app', [
         '../../app'
       ]);
 
     var expected = [
-      // add files you expect to exist here.
       '.jshintrc',
       '.editorconfig',
       'package.json',
@@ -44,14 +43,13 @@ describe('commander generator', function () {
     });
   });
 
-  it('creates expected files', function (done) {
+  it('commander:command creates expected files', function (done) {
 
       this.app = helpers.createGenerator('commander:command', [
         '../../command'
       ], ['mycmd']);
 
     var expected = [
-      // add files you expect to exist here.
       'cmds/mycmd.js'
     ];
 
@@ -64,5 +62,26 @@ describe('commander generator', function () {
       done();
     });
   });
+
+  it('commander:component creates expected files', function (done) {
+
+      this.app = helpers.createGenerator('commander:component', [
+        '../../component'
+      ], ['mycomp']);
+
+    var expected = [
+      'lib/mycomp.js'
+    ];
+
+    helpers.mockPrompt(this.app, {
+      'compName': 'mycomp'
+    });
+
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
 });
 

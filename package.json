@@ -18,7 +18,7 @@
     "url": "git://github.com/Hypercubed/generator-commander.git"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -R spec"
   },
   "dependencies": {
     "yeoman-generator": "~0.13.0"
