@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+
+var program  = require('commander');
+
+program
+	.on('*', function(name) {
+		console.log('\''+name+'\' is not a known command. See \'<%= appName %> --help\':');
+		program.outputHelp();
+		process.exit(1);
+	});
+
+program
+	.version('<%= appVersion %>')
+	.parse(process.argv);
+
+if (program.args.length < 1 ) {
+	console.log('No command specified. See \'<%= appName %> --help\':');
+	program.outputHelp();
+	process.exit(1);
+}

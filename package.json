@@ -1,9 +1,9 @@
 {
   "name": "generator-commander",
-  "version": "0.0.0",
-  "description": "A generator for Yeoman",
+  "version": "0.0.1",
+  "description": "A commander-cli generator for Yeoman",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator","commander","cli"
   ],
   "homepage": "https://github.com/Hypercubed/generator-commander",
   "bugs": "https://github.com/Hypercubed/generator-commander/issues",

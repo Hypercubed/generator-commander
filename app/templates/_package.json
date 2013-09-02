@@ -1,5 +1,20 @@
 {
-  "name": "package",
-  "version": "0.0.0",
-  "dependencies": {}
+  "name": "<%= appSlug %>",
+  "version": "<%= appVersion %>",
+  "description": "<%= appDescription %>",
+  "private": true,
+  "bin": {
+    "<%= appSlug %>": "./bin/<%= appSlug %>"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "author": "<%= author %>",
+  "license": "<%= license %>",
+  "dependencies": {
+    "commander": "~2.0.0"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0"
+  }
 }
