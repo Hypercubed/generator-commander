@@ -12,8 +12,6 @@ describe('commander generators', function () {
         return done(err);
       }
 
-
-
       done();
     }.bind(this));
   });
