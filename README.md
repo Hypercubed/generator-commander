@@ -1,4 +1,4 @@
-# generator-commander [![Build Status](https://secure.travis-ci.org/Hypercubed/generator-commander.png?branch=master)](https://travis-ci.org/Hypercubed/generator-commander)
+# generator-commander [![Build Status](https://secure.travis-ci.org/Hypercubed/generator-commander.png?branch=master)](https://travis-ci.org/Hypercubed/generator-commander) [![NPM version](https://badge.fury.io/js/generator-commander.png)](http://badge.fury.io/js/generator-commander)
 
 A generator for [Yeoman](http://yeoman.io).
 
