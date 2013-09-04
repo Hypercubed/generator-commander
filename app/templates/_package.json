@@ -15,6 +15,5 @@
     "commander": "~2.0.0"
   },
   "devDependencies": {
-    "mocha": "~1.12.0"
   }
 }
