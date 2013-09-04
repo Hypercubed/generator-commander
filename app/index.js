@@ -26,7 +26,7 @@ CommanderGenerator.prototype.askFor = function askFor() {
             name: 'appName',
             pattern: /^[a-zA-Z0-9\s\-]+$/,
             message: 'Name must be only letters, spaces, or dashes',
-            default: 'myapp',
+            default: path.basename(process.cwd()),
             required: true
           },
           { name: 'appVersion', default: '0.0.0', message: 'version' },  // TODO: validate

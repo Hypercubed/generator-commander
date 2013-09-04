@@ -4,10 +4,12 @@ var path = require('path');
 
 describe('<%= appSlug %> bin', function(){
 	var cmd = 'node '+path.join(__dirname, '../bin/<%= appSlug %>')+' ';
+	console.log(cmd);
 
 	it('--help should run without errors', function(done) {
 		exec(cmd+'--help', function (error, stdout, stderr) {
 			assert(!error);
+			assert(stdout.match(/Usage: <%= appSlug %>/i));
 			done();
 		});
 	});
@@ -15,6 +17,7 @@ describe('<%= appSlug %> bin', function(){
 	it('--version should run without errors', function(done) {
 		exec(cmd+'--version', function (error, stdout, stderr) {
 			assert(!error);
+			assert(stdout.match('<%= appVersion %>'));
 			done();
 		});
 	});
@@ -23,7 +26,6 @@ describe('<%= appSlug %> bin', function(){
         this.timeout(4000);
 
 		exec(cmd, function (error, stdout, stderr) {
-
 			assert(error);
 			assert.equal(error.code,1);
 			assert(stdout.match(/No command specified/i));
