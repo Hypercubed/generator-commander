@@ -12,9 +12,8 @@
   "author": "<%= author %>",
   "license": "<%= license %>",
   "dependencies": {
-    "commander": "~2.0.0"
+    <%= dependencies %>
   },
   "devDependencies": {
-    "mocha": "~1.12.0"
   }
 }

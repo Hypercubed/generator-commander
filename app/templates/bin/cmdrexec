@@ -3,14 +3,16 @@
 var program  = require('commander');
 
 program
+	.version('<%= appVersion %>')
 	.on('*', function(name) {
 		console.log('\''+name+'\' is not a known command. See \'<%= appName %> --help\':');
 		program.outputHelp();
 		process.exit(1);
 	});
 
+<%= components %>
+
 program
-	.version('<%= appVersion %>')
 	.parse(process.argv);
 
 if (program.args.length < 1 ) {

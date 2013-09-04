@@ -52,6 +52,41 @@ CommanderGenerator.prototype.askFor = function askFor() {
 
 };
 
+CommanderGenerator.prototype.askForComponents = function askFor() {
+  var cb = this.async();
+
+  var prompts = [
+          {
+            name: 'components',
+            type: 'checkbox',
+            message: 'Additional components to install:',
+            choices: [
+              { name: 'Logger (adds a Winston logger)', value: 'logger' },
+              { name: 'Commander loader (automatically loads commands from cmds/ directory)', value: 'loader' },
+              { name: 'TabTab (adds command line autocompletion)', value: 'tabtab' },
+              { name: 'Package (load reasonable defaults from your application\'s package.json)',value: 'package' },
+              { name: 'Config (adds a config command)', value: 'config' },
+              { name: 'Help (adds a `did you mean` messege when an unknown command is given)', value: 'help' },
+            ]
+          }
+        ];
+
+  this.prompt(prompts, function (props) {
+    this.components = props.components;
+
+    this.dependencies = '"commander": "~2.0.0"';
+    if (props.components.length > 0)
+        this.dependencies += ',\n    "autocmdr": "~0.0.4"';
+
+    this.components = props.components
+      .map(function(d) { return 'require(\'autocmdr/lib/'+d+'\')(program);' })
+      .join('\n');
+
+    cb();
+  }.bind(this));
+
+};
+
 CommanderGenerator.prototype.app = function app() {
   this.mkdir('bin');
   this.mkdir('test');
