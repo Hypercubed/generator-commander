@@ -31,7 +31,8 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'appName': 'example'
+      'appName': 'example',
+      'components': [ 'logger', 'loader', 'completion', 'package', 'config', 'help' ]
     });
 
     this.app.options['skip-install'] = true;

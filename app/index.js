@@ -63,7 +63,7 @@ CommanderGenerator.prototype.askForComponents = function askFor() {
             choices: [
               { name: 'Logger (adds a Winston logger)', value: 'logger' },
               { name: 'Commander loader (automatically loads commands from cmds/ directory)', value: 'loader' },
-              { name: 'TabTab (adds command line autocompletion)', value: 'tabtab' },
+              { name: 'Autocompletion (adds command line autocompletion)', value: 'completion' },
               { name: 'Package (load reasonable defaults from your application\'s package.json)',value: 'package' },
               { name: 'Config (adds a config command)', value: 'config' },
               { name: 'Help (adds a `did you mean` messege when an unknown command is given)', value: 'help' },
@@ -81,6 +81,10 @@ CommanderGenerator.prototype.askForComponents = function askFor() {
     this.components = props.components
       .map(function(d) { return 'require(\'autocmdr/lib/'+d+'\')(program);' })
       .join('\n');
+
+    this.logger = props.components.indexOf('logger') > -1;
+    this.package = props.components.indexOf('package') > -1;
+    this.help = props.components.indexOf('help') > -1;
 
     cb();
   }.bind(this));

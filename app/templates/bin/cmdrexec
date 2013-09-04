@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 
 var program  = require('commander');
+<%= components %>
 
+<% if (!package) { %>
 program
-	.version('<%= appVersion %>')
+	.version('<%= appVersion %>');
+<% } 
+ if (!help) { %>
+program
 	.on('*', function(name) {
 		console.log('\''+name+'\' is not a known command. See \'<%= appName %> --help\':');
 		program.outputHelp();
 		process.exit(1);
 	});
-
-<%= components %>
+<% } %>
 
 program
 	.parse(process.argv);
