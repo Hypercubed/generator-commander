@@ -1,18 +1,27 @@
 {
-  "name": "<%= appSlug %>",
-  "version": "<%= appVersion %>",
-  "description": "<%= appDescription %>",
+  "name": "<%= slugname %>",
+  "version": "<%= version %>",
+  "description": "<%= description %>",
   "private": true,
   "bin": {
-    "<%= appSlug %>": "./bin/<%= appSlug %>"
+    "<%= slugname %>": "./bin/<%= slugname %>"
   },
   "scripts": {
     "test": "mocha -R spec"
   },
-  "author": "<%= author %>",
+  "author": {
+    "name": "<%= author %>",
+    "email": "<%= authorEmail %>"<% if (authorUrl) { %>,
+    "url": "<%= authorUrl %>"<% } %>
+  },
+  "repository": {
+    "type": "git",
+    "url": "<%= repoUrl %>"
+  },
   "license": "<%= license %>",
+  "bugs": "<%= bugsUrl %>",
   "dependencies": {
-    "commander": "~2.0.0"
+    <%= dependencies %>
   },
   "devDependencies": {
   }

@@ -2,6 +2,12 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
+var cp = require('child_process');
+
+var GitHubApi = require('github');
+var github = new GitHubApi({
+  version: '3.0.0'
+});
 
 var CommanderGenerator = module.exports = function CommanderGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
@@ -23,48 +29,93 @@ CommanderGenerator.prototype.askFor = function askFor() {
 
   var prompts = [
           {
-            name: 'appName',
+            name: 'name',
             pattern: /^[a-zA-Z0-9\s\-]+$/,
-            message: 'Name must be only letters, spaces, or dashes',
+            message: 'Name (must be only letters, spaces, or dashes)',
             default: path.basename(process.cwd()),
             required: true
           },
-          { name: 'appVersion', default: '0.0.0', message: 'version' },  // TODO: validate
-          { name: 'appDescription', default: 'A commander CLI app', message: 'description' },
-          { name: 'author', default: '', message: 'author' },
+          { name: 'version', default: '0.0.0', message: 'Version' },
+          { name: 'description', default: 'A commander CLI app', message: 'Description' },
+          //{ name: 'homepage', message: 'Homepage' },
+          //{ name: 'author', default: '', message: 'Author\'s Name' },
+          { name: 'githubUser', message: 'GitHub username' },
+          //{ name: 'authorEmail', message: 'Author\'s Email'},
+          //{ name: 'authorUrl', message: 'Author\'s Homepage' },
           { name: 'license', default: 'MIT', message: 'license' }
         ];
 
   this.prompt(prompts, function (props) {
-    this.appName = props.appName;
-    this.appSlug =  this._.slugify(props.appName);
-    this.appVersion = props.appVersion;
-    this.appDescription = props.appDescription;
-    this.appUsage = 'See `'+this.appSlug+' --help`';
-    this.author = props.author;
-    this.license = props.license;
+    util._extend(this, props);
 
-    var today = new Date();
-    this.year = today.getFullYear();
+    this.slugname =  this._.slugify(props.name);
+    this.dependencies = '"commander": "~2.0.0"';
+
+    this.year = (new Date()).getFullYear();
 
     cb();
   }.bind(this));
 
 };
 
-CommanderGenerator.prototype.app = function app() {
-  this.mkdir('bin');
-  this.mkdir('test');
-
-  var slug = this.appSlug || 'test';  // npm test
-
-  this.template('_package.json', 'package.json');
-  this.template('Readme.md', 'Readme.md');
-  this.template('bin/cmdrexec', 'bin/'+slug);
-  this.template('test/test.js', 'test/'+slug+'.js');
+var githubUserInfo = function (name, cb) {
+  github.user.getFrom({
+    user: name
+  }, function (err, res) {
+    if (err) return cb(null);
+    cb(JSON.parse(JSON.stringify(res)));
+  });
 };
 
+CommanderGenerator.prototype.userInfo = function userInfo() {
+  var done = this.async();
+
+  githubUserInfo(this.githubUser, function (res) {
+    if (res) {
+        this.author = res.name;
+        this.authorEmail = res.email;
+        this.authorUrl = res.html_url;
+        this.repoUrl = this.authorUrl + '/' + this.slugname;
+        this.bugsUrl = this.repoUrl+ '/issues'
+    } else {
+        this.author = '';
+        this.authorEmail = '';
+        this.authorUrl = '';
+        this.repoUrl = '';
+        this.bugsUrl = '';
+    }
+
+    done();
+  }.bind(this));
+};
+
+CommanderGenerator.prototype.app = function app() {
+  var cb = this.async();
+
+  this.mkdir('bin');
+
+  this.template('_package.json', 'package.json');
+  this.template('bin/cmdrexec', 'bin/'+this.slugname);
+
+  cb();
+};
+
+CommanderGenerator.prototype.readme = function readme() {
+    var cb = this.async();
+
+    var bin = path.join(process.cwd(), './bin/', this.slugname);
+
+    cp.exec('node '+bin+' --help', function (error, stdout, stderr) {
+        this.usage = (error === null) ? stdout : 'node ./bin/'+this.slugname+' --help';
+        this.template('Readme.md', 'Readme.md');
+        cb();
+    }.bind(this));
+}
+
 CommanderGenerator.prototype.projectfiles = function projectfiles() {
+  this.mkdir('test');
+
+  this.template('test/test.js', 'test/'+this.slugname+'.js');
   this.copy('editorconfig', '.editorconfig');
   this.copy('jshintrc', '.jshintrc');
 };

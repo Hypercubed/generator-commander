@@ -31,7 +31,14 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'appName': 'example'
+      'name': 'example',
+      'version': '0.0.0',
+      'license': 'MIT',
+      'author': 'J. H. Author',
+      'authorEmail': 'jha@mail.com',
+      'authorUrl': 'http://github.com/jhauthor',
+      'repoUrl': 'http://github.com/jhauthor/example',
+      'bugsUrl': 'http://github.com/jhauthor/example/issues'
     });
 
     this.app.options['skip-install'] = true;
