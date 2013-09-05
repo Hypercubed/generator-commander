@@ -51,8 +51,7 @@ CommanderGenerator.prototype.askFor = function askFor() {
     this.slugname =  this._.slugify(props.name);
     this.dependencies = '"commander": "~2.0.0"';
 
-    if (this.license == "MIT")
-        this.license = "[MIT License](http://en.wikipedia.org/wiki/MIT_License)";
+    this.licenseLink = (this.license == "MIT") ? "[MIT License](http://en.wikipedia.org/wiki/MIT_License)" : this.license;
 
     this.year = (new Date()).getFullYear();
 

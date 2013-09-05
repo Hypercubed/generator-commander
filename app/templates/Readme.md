@@ -19,7 +19,7 @@ $ npm install -g <%= slugname %>
 
 Copyright (c) <%= year %> <%= author %>
 
-<%= license %>
+<%= licenseLink %>
 
 # Acknowledgments
 
