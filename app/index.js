@@ -51,6 +51,9 @@ CommanderGenerator.prototype.askFor = function askFor() {
     this.slugname =  this._.slugify(props.name);
     this.dependencies = '"commander": "~2.0.0"';
 
+    if (this.license == "MIT")
+        this.license = "[MIT License](http://en.wikipedia.org/wiki/MIT_License)";
+
     this.year = (new Date()).getFullYear();
 
     cb();
@@ -112,10 +115,15 @@ CommanderGenerator.prototype.readme = function readme() {
     }.bind(this));
 }
 
-CommanderGenerator.prototype.projectfiles = function projectfiles() {
+CommanderGenerator.prototype.test = function projectfiles() {
   this.mkdir('test');
 
   this.template('test/test.js', 'test/'+this.slugname+'.js');
+};
+
+CommanderGenerator.prototype.projectfiles = function projectfiles() {
   this.copy('editorconfig', '.editorconfig');
   this.copy('jshintrc', '.jshintrc');
+  this.copy('gitignore', '.gitignore');
+  this.copy('travis.yml', '.travis.yml');
 };
