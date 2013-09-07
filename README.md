@@ -1,4 +1,4 @@
-# generator-commander [![Build Status](https://secure.travis-ci.org/Hypercubed/generator-commander.png?branch=master)](https://travis-ci.org/Hypercubed/generator-commander) [![NPM version](https://badge.fury.io/js/generator-commander.png)](http://badge.fury.io/js/generator-commander)
+# generator-commander [![Build Status](https://secure.travis-ci.org/Hypercubed/generator-commander.png?branch=dev)](https://travis-ci.org/Hypercubed/generator-commander) [![NPM version](https://badge.fury.io/js/generator-commander.png)](http://badge.fury.io/js/generator-commander)
 
 A generator for [Yeoman](http://yeoman.io).
 
@@ -39,6 +39,9 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 
 ## License
 
-Copyright (c) 2013 J. Harshbarger
-
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+
+Copyright (c) 2013 J. Harshbarger
+[![Gittip donate button](http://badgr.co/gittip/hypercubed.png)](https://www.gittip.com/hypercubed/ "Donate weekly to this project using Gittip")
+[![Paypal donate button](http://badgr.co/paypal/donate.png?bg=%23feb13d)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X7KYR6T9U2NHC "One time donation to this project using Paypal")
+
