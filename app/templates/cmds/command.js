@@ -1,6 +1,7 @@
 /* <%= cmdName %> commander component
  * To use add require('../cmds/<%= cmdName %>.js')(program) to your commander.js based node executable before program.parse
  */
+'use strict';
 
 module.exports = function(program) {
 
