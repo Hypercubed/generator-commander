@@ -59,7 +59,8 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'cmdName': 'mycmd'
+      'name': 'mycmd',
+      'version': '0.0.0'
     });
 
     this.app.run({}, function () {
