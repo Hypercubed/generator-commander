@@ -81,6 +81,7 @@ CommanderGenerator.prototype.userInfo = function userInfo() {
         this.repoUrl = this.authorUrl + '/' + this.slugname;
         this.bugsUrl = this.repoUrl+ '/issues'
     } else {
+    	console.log('Failed to retreive user information from GitHub.')
         this.author = '';
         this.authorEmail = '';
         this.authorUrl = '';
