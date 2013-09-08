@@ -1,22 +1,26 @@
-<%= appName %>
+<%= name %>
 =============
 
 # Description
 
-<%= appDescription %>
+<%= description %>
 
 # Usage
 
+To install <%= name %> from npm, run:
+
 ```
-<%= appUsage %>
+$ npm install -g <%= slugname %>
 ```
+
+```<%= usage %>```
 
 # License
 
-<%= license %>
-
 Copyright (c) <%= year %> <%= author %>
+
+<%= licenseLink %>
 
 # Acknowledgments
 
-Built using [generator-commader].
+Built using [generator-commader](https://github.com/Hypercubed/generator-commander).

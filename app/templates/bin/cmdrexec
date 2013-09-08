@@ -1,16 +1,19 @@
 #!/usr/bin/env node
+'use strict';
 
 var program  = require('commander');
+
 <%= components %>
 
 <% if (!package) { %>
 program
 	.version('<%= appVersion %>');
 <% } 
- if (!help) { %>
+
+if (!help) { %>
 program
 	.on('*', function(name) {
-		console.log('\''+name+'\' is not a known command. See \'<%= appName %> --help\':');
+		console.log('\''+name+'\' is not a known command. See \'<%= slugname %> --help\':');
 		program.outputHelp();
 		process.exit(1);
 	});
@@ -20,7 +23,7 @@ program
 	.parse(process.argv);
 
 if (program.args.length < 1 ) {
-	console.log('No command specified. See \'<%= appName %> --help\':');
+	console.log('No command specified. See \'<%= slugname %> --help\':');
 	program.outputHelp();
 	process.exit(1);
 }
