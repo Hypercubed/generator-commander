@@ -80,7 +80,7 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'compName': 'mycomp'
+      'name': 'mycomp'
     });
 
     this.app.run({}, function () {

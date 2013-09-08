@@ -6,7 +6,6 @@ var yeoman = require('yeoman-generator');
 var CommandGenerator = module.exports = function CommandGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
-  //this.name = args[0] || 'mycmd';
   this.argument('name', { type: String, required: false });
 
   this.on('end', function () {
