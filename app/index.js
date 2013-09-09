@@ -43,7 +43,7 @@ CommanderGenerator.prototype.askFor = function askFor() {
           { name: 'description', default: 'A commander CLI app', message: 'Description' },
           //{ name: 'homepage', message: 'Homepage' },
           //{ name: 'author', default: '', message: 'Author\'s Name' },
-          { name: 'githubUser', message: 'GitHub username' },
+          //{ name: 'githubUser', message: 'GitHub username' },
           //{ name: 'authorEmail', message: 'Author\'s Email'},
           //{ name: 'authorUrl', message: 'Author\'s Homepage' },
           { name: 'license', default: 'MIT', message: 'license' }
@@ -73,38 +73,76 @@ var githubUserInfo = function (name, cb) {
   });
 };
 
-CommanderGenerator.prototype.userInfo = function userInfo() {
-  var done = this.async();
+CommanderGenerator.prototype.githubInfo = function githubInfo() {
+  var cb = this.async();
 
-  githubUserInfo(this.githubUser, function (res) {
-    if (res) {
-        this.author = res.name;
-        this.authorEmail = res.email;
-        this.authorUrl = res.html_url;
+  var prompts = [
+          { name: 'githubUser', message: 'GitHub username' }
+        ];
+
+  this.prompt(prompts, function (props) {
+    this.githubUser = props.githubUser;
+
+    console.log('');
+    console.log('    Retrieving user information from GitHub.  Please wait.');
+    githubUserInfo(this.githubUser, function (res) {
+
+        if (res) {
+            console.log('    Retrieved user information from GitHub.')
+            this.author = res.name;
+            this.authorEmail = res.email;
+            this.authorUrl = res.html_url;
+            this.repoUrl = this.authorUrl + '/' + this.slugname;
+            this.bugsUrl = this.repoUrl+ '/issues'
+        } else {
+            console.log('    Failed to retrieve user information from GitHub.')
+            this.author = '';
+            this.authorEmail = '';
+            this.authorUrl = 'https://github.com/'+this.githubUser+'/';
+        }
+
         this.repoUrl = this.authorUrl + '/' + this.slugname;
         this.bugsUrl = this.repoUrl+ '/issues'
-    } else {
-    	console.log('Failed to retreive user information from GitHub.')
-        this.author = '';
-        this.authorEmail = '';
-        this.authorUrl = '';
-        this.repoUrl = '';
-        this.bugsUrl = '';
-    }
 
-    done();
+        cb();
+      }.bind(this));
+
   }.bind(this));
+
+};
+
+CommanderGenerator.prototype.userInfo = function userInfo() {
+  var cb = this.async();
+
+  var prompts = [
+          { name: 'author', message: 'Author\'s Name', default: this.author },
+          { name: 'authorEmail', message: 'Author\'s Email', default: this.authorEmail},
+          { name: 'authorUrl', message: 'Author\'s Homepage', default: this.authorUrl },
+          { name: 'repoUrl', message: 'Repository URL', default: this.repoUrl },
+          { name: 'bugsUrl', message: 'Support URL', default: this.bugsUrl }
+        ];
+
+  console.log('');
+  console.log('    Please confirm the following.');
+  this.prompt(prompts, function (props) {
+    util._extend(this, props);
+
+    console.log('');
+
+    cb();
+  }.bind(this));
+
 };
 
 CommanderGenerator.prototype.app = function app() {
-  var cb = this.async();
+    var cb = this.async();
 
-  this.mkdir('bin');
+    this.mkdir('bin');
 
-  this.template('_package.json', 'package.json');
-  this.template('bin/cmdrexec', 'bin/'+this.slugname);
+    this.template('_package.json', 'package.json');
+    this.template('bin/cmdrexec', 'bin/'+this.slugname);
 
-  cb();
+    cb();
 };
 
 CommanderGenerator.prototype.readme = function readme() {
@@ -117,6 +155,7 @@ CommanderGenerator.prototype.readme = function readme() {
         this.template('Readme.md', 'Readme.md');
         cb();
     }.bind(this));
+
 }
 
 CommanderGenerator.prototype.test = function projectfiles() {
