@@ -7,3 +7,4 @@ _(managed using [todo-md](https://github.com/Hypercubed/todo-md))_
 - [x] Add bugs and repo url to package
 - [ ] Integrate autocmdr
 - [ ] Check should return error on unknown command error
+- [ ] check --version should run without errors error
