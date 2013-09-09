@@ -11,7 +11,6 @@ describe('<%= slugname %> bin', function(){
 	it('--help should run without errors', function(done) {
 		exec(cmd+'--help', function (error, stdout, stderr) {
 			assert(!error);
-			assert(stdout.match(/Usage: <%= slugname %>/i));
 			done();
 		});
 	});
@@ -19,7 +18,6 @@ describe('<%= slugname %> bin', function(){
 	it('--version should run without errors', function(done) {
 		exec(cmd+'--version', function (error, stdout, stderr) {
 			assert(!error);
-			assert(stdout.match('<%= version %>'));
 			done();
 		});
 	});
@@ -30,7 +28,6 @@ describe('<%= slugname %> bin', function(){
 		exec(cmd, function (error, stdout, stderr) {
 			assert(error);
 			assert.equal(error.code,1);
-			assert(stdout.match(/No command specified/i));
 			done();
 		});
 
@@ -42,7 +39,6 @@ describe('<%= slugname %> bin', function(){
 		exec(cmd+'junkcmd', function (error, stdout, stderr) {
 			assert(error);
 			assert.equal(error.code,1);
-			assert(stdout.match(/is not a known command/i));
 			done();
 		});
 	});
