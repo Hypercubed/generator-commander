@@ -19,7 +19,7 @@ describe('commander generators', function () {
   it('commander:app creates expected files', function (done) {
 
       this.app = helpers.createGenerator('commander:app', [
-        '../../app'
+        '../../app', [helpers.createDummyGenerator(),'license:app']
       ]);
 
     var expected = [
