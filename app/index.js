@@ -16,6 +16,13 @@ var CommanderGenerator = module.exports = function CommanderGenerator(args, opti
   this.argument('name', { type: String, required: false });
   this.name = this.name || path.basename(process.cwd());
 
+
+  this.hookFor('license', {
+    as: 'app',
+    args: [this.author, this.license],
+    options: this.options
+  });
+
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'], bower: false });
   });
