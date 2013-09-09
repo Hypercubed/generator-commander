@@ -1,9 +1,11 @@
 {
   "name": "generator-commander",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "A commander-cli generator for Yeoman",
   "keywords": [
-    "yeoman-generator","commander","cli"
+    "yeoman-generator",
+    "commander",
+    "cli"
   ],
   "homepage": "https://github.com/Hypercubed/generator-commander",
   "bugs": "https://github.com/Hypercubed/generator-commander/issues",
@@ -21,7 +23,8 @@
     "test": "mocha -R spec"
   },
   "dependencies": {
-    "yeoman-generator": "~0.13.0"
+    "yeoman-generator": "~0.13.0",
+    "github": "~0.1.10"
   },
   "devDependencies": {
     "mocha": "~1.12.0"

@@ -4,7 +4,6 @@
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
 
-
 describe('commander generators', function () {
   before(function (done) {
     helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
@@ -31,8 +30,15 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'appName': 'example',
       'components': [ 'logger', 'loader', 'completion', 'package', 'config', 'help' ]
+      'name': 'example',
+      'version': '0.0.0',
+      'license': 'MIT',
+      'author': 'J. H. Doe',
+      'authorEmail': 'jhd@mail.com',
+      'authorUrl': 'http://github.com/jhdoe',
+      'repoUrl': 'http://github.com/jhdoe/example',
+      'bugsUrl': 'http://github.com/jhdoe/example/issues'
     });
 
     this.app.options['skip-install'] = true;
@@ -53,7 +59,8 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'cmdName': 'mycmd'
+      'name': 'mycmd',
+      'version': '0.0.0'
     });
 
     this.app.run({}, function () {
@@ -73,7 +80,7 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'compName': 'mycomp'
+      'name': 'mycomp'
     });
 
     this.app.run({}, function () {
