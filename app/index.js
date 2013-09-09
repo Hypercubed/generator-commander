@@ -18,9 +18,7 @@ var CommanderGenerator = module.exports = function CommanderGenerator(args, opti
 
 
   this.hookFor('license', {
-    as: 'app',
-    args: [this.author, this.license],
-    options: this.options
+    as: 'app'
   });
 
   this.on('end', function () {
@@ -139,6 +137,17 @@ CommanderGenerator.prototype.userInfo = function userInfo() {
     cb();
   }.bind(this));
 
+};
+
+CommanderGenerator.prototype.runLicense = function runLicense() {
+    var cb = this.async();  // Need to ensure this runs before readme
+    var self = this;
+
+    this.runHooks(function(ret) {
+        self._hooks = [];
+        console.log(ret);
+        cb();
+    });
 };
 
 CommanderGenerator.prototype.app = function app() {
