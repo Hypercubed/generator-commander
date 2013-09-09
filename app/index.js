@@ -46,7 +46,7 @@ CommanderGenerator.prototype.askFor = function askFor() {
           //{ name: 'githubUser', message: 'GitHub username' },
           //{ name: 'authorEmail', message: 'Author\'s Email'},
           //{ name: 'authorUrl', message: 'Author\'s Homepage' },
-          { name: 'license', default: 'MIT', message: 'license' }
+          //{ name: 'license', default: 'MIT', message: 'license' }
         ];
 
   this.prompt(prompts, function (props) {
@@ -136,13 +136,14 @@ CommanderGenerator.prototype.userInfo = function userInfo() {
 
 CommanderGenerator.prototype.runLicense = function runLicense() {
     var cb = this.async();  // Need to ensure this runs before readme
+
+    this.options['author'] = this.author;
+
     var self = this;
-
-    var next = function(ret) {
+    this.invoke('license:app', { options: this.options }, function() {
+        self.license = self.options['license'];
         cb();
-    };
-
-    self.invoke('license:app', { args: ['--name==test']}, next);
+    });
 
 };
 
