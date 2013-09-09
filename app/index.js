@@ -16,11 +16,6 @@ var CommanderGenerator = module.exports = function CommanderGenerator(args, opti
   this.argument('name', { type: String, required: false });
   this.name = this.name || path.basename(process.cwd());
 
-
-  this.hookFor('license', {
-    as: 'app'
-  });
-
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'], bower: false });
   });
@@ -143,11 +138,12 @@ CommanderGenerator.prototype.runLicense = function runLicense() {
     var cb = this.async();  // Need to ensure this runs before readme
     var self = this;
 
-    this.runHooks(function(ret) {
-        self._hooks = [];
-        console.log(ret);
+    var next = function(ret) {
         cb();
-    });
+    };
+
+    self.invoke('license:app', { args: ['--name==test']}, next);
+
 };
 
 CommanderGenerator.prototype.app = function app() {
