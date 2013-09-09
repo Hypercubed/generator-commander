@@ -135,7 +135,7 @@ CommanderGenerator.prototype.userInfo = function userInfo() {
 };
 
 CommanderGenerator.prototype.app = function app() {
-    var cb = this.async();
+    var cb = this.async();  // Need to ensure this runs before readme
 
     this.mkdir('bin');
 
