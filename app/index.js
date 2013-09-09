@@ -13,6 +13,9 @@ var github = new GitHubApi({
 var CommanderGenerator = module.exports = function CommanderGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
+  this.argument('name', { type: String, required: false });
+  this.name = this.name || path.basename(process.cwd());
+
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'], bower: false });
   });
@@ -33,7 +36,7 @@ CommanderGenerator.prototype.askFor = function askFor() {
             name: 'name',
             pattern: /^[a-zA-Z0-9\s\-]+$/,
             message: 'Name (must be only letters, spaces, or dashes)',
-            default: path.basename(process.cwd()),
+            default: this.name,
             required: true
           },
           { name: 'version', default: '0.0.0', message: 'Version' },
