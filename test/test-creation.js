@@ -30,7 +30,7 @@ describe('commander generators', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'components': [ 'logger', 'loader', 'completion', 'package', 'config', 'help' ]
+      'components': [ 'logger', 'loader', 'completion', 'package', 'config', 'help' ],
       'name': 'example',
       'version': '0.0.0',
       'license': 'MIT',

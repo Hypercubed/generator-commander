@@ -2,13 +2,16 @@
 'use strict';
 
 var program  = require('commander');
+
 <%= components %>
 
 <% if (!package) { %>
 program
 	.version('<%= appVersion %>');
+
 <% }
- if (!help) { %>
+
+if (!help) { %>
 program
 	.on('*', function(name) {
 		console.log('\''+name+'\' is not a known command. See \'<%= slugname %> --help\':');

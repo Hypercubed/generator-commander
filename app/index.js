@@ -170,7 +170,6 @@ CommanderGenerator.prototype.askForComponents = function askFor() {
 
     cb();
   }.bind(this));
-
 };
 
 CommanderGenerator.prototype.app = function app() {
