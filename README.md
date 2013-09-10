@@ -2,7 +2,7 @@
 
 A CLI generator for [Yeoman](http://yeoman.io).
 
-This generator will create a [Commander.js](https://github.com/visionmedia/commander.js) based command line application using [yo](https://github.com/yeoman/yo).
+This generator will create a [Commander.js](https://github.com/visionmedia/commander.js) based command line application using [yo](https://github.com/yeoman/yo) with options to include [autocmdr](https://github.com/Hypercubed/autocmdr) components.
 
 ## Installation
 
@@ -16,7 +16,7 @@ To install generator-commander:
 
 ## Usage
 
-At the command-line, cd into an empty directory, run this command and initiate the app generator:
+At the command-line, `cd` into an empty directory, run this command and initiate the app generator:
 
     $ yo commander
 
@@ -30,7 +30,13 @@ This will create a new file in `cmds/` directory of the current working director
 
     require('../cmds/<name>.js')(program);
 
-to your application in the `bin` directory.
+to your application in the `bin` directory; or optionally install the `autocmdr` components for auto-loading `cmds`.
+
+## [autocmdr](https://github.com/Hypercubed/autocmdr) and generator-commander 
+
+[autocmdr](https://github.com/Hypercubed/autocmdr) and generator-commander are brothers.  autcmdr is a command line tool for running commands (commands in a  commander.js command-component) and a set of libraries for enhancing command line applications.  generator-commander is a tool for scaffolding commander.js command-components and command line applications.
+
+Calling `autocmdr` from a shell will load commands located in the current working directory's `cmds/` folder. New commands can be added to any directory by invoking `yo commander:command <name>`.  When running `yo commander` you are given the option of including autocmdr components in your application.  See the autocmdr [readme](https://github.com/Hypercubed/autocmdr/blob/master/Readme.md) for a complete workflow and explanation of the available components.
 
 ## What is Yeoman?
 
