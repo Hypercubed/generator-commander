@@ -1,4 +1,4 @@
-<%= name %>
+<%= name %> [![Build Status](https://secure.travis-ci.org/<%= githubUser %>/<%= slugname %>.png?branch=master)](https://travis-ci.org/<%= githubUser %>/<%= slugname %>) [![NPM version](https://badge.fury.io/js/<%= slugname %>.png)](http://badge.fury.io/js/<%= slugname %>)
 =============
 
 # Description

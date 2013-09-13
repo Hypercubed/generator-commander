@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "<%= repoUrl %>"
+    "url": "<%= repoUrl %>.git"
   },
   "license": "<%= license %>",
   "bugs": "<%= bugsUrl %>",
