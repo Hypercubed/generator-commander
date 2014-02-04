@@ -7,7 +7,7 @@ var program  = require('commander');
 
 <% if (!package) { %>
 program
-	.version('<%= appVersion %>');
+	.version('<%= version %>');
 
 <% }
 
