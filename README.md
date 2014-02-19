@@ -22,7 +22,7 @@ At the command-line, `cd` into an empty directory, run this command and initiate
 
 This will generate files in the current working directory for a [Commander.js](https://github.com/visionmedia/commander.js) based application.
 
-To crate a commander.js command-component initiate the command generator:
+To create a commander.js command-component initiate the command generator:
 
     $ yo commander:command <name>
 
