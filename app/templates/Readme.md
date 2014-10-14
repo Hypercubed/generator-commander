@@ -1,11 +1,10 @@
-<%= name %>
-=============
+#<%= name %>
 
-# Description
+## Description
 
 <%= description %>
 
-# Usage
+## Usage
 
 To install <%= name %> from npm, run:
 
@@ -15,12 +14,12 @@ $ npm install -g <%= slugname %>
 
 ```<%= usage %>```
 
-# License
+## License
 
 Copyright (c) <%= year %> <%= author %>
 
 <%= licenseLink %>
 
-# Acknowledgments
+## Acknowledgments
 
 Built using [generator-commader](https://github.com/Hypercubed/generator-commander).
