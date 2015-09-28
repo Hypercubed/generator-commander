@@ -10,7 +10,7 @@ var github = new GitHubApi({
   version: '3.0.0'
 });
 
-var CommanderGenerator = module.exports = function CommanderGenerator(args, options, config) {
+var CommanderGenerator = module.exports = function CommanderGenerator(args, options) {
   yeoman.generators.Base.apply(this, arguments);
 
   this.argument('name', { type: String, required: false });
@@ -55,7 +55,7 @@ CommanderGenerator.prototype.askFor = function askFor() {
     this.slugname =  this._.slugify(props.name);
     this.dependencies = '"commander": "~2.0.0"';
 
-    this.licenseLink = (this.license == "MIT") ? "[MIT License](http://en.wikipedia.org/wiki/MIT_License)" : this.license;
+    this.licenseLink = (this.license === 'MIT') ? '[MIT License](http://en.wikipedia.org/wiki/MIT_License)' : this.license;
 
     this.year = (new Date()).getFullYear();
 
@@ -68,7 +68,7 @@ var githubUserInfo = function (name, cb) {
   github.user.getFrom({
     user: name
   }, function (err, res) {
-    if (err) return cb(null);
+    if (err) {return cb(null);}
     cb(JSON.parse(JSON.stringify(res)));
   });
 };
@@ -77,8 +77,8 @@ CommanderGenerator.prototype.githubInfo = function githubInfo() {
   var cb = this.async();
 
   var prompts = [
-          { name: 'githubUser', message: 'GitHub username' }
-        ];
+    { name: 'githubUser', message: 'GitHub username' }
+  ];
 
   this.prompt(prompts, function (props) {
     this.githubUser = props.githubUser;
@@ -88,21 +88,21 @@ CommanderGenerator.prototype.githubInfo = function githubInfo() {
     githubUserInfo(this.githubUser, function (res) {
 
         if (res) {
-            console.log('    Retrieved user information from GitHub.')
+            console.log('    Retrieved user information from GitHub.');
             this.author = res.name;
             this.authorEmail = res.email;
             this.authorUrl = res.html_url;
             this.repoUrl = this.authorUrl + '/' + this.slugname;
-            this.bugsUrl = this.repoUrl+ '/issues'
+            this.bugsUrl = this.repoUrl+ '/issues';
         } else {
-            console.log('    Failed to retrieve user information from GitHub.')
+            console.log('    Failed to retrieve user information from GitHub.');
             this.author = '';
             this.authorEmail = '';
             this.authorUrl = 'https://github.com/'+this.githubUser+'/';
         }
 
         this.repoUrl = this.authorUrl + '/' + this.slugname;
-        this.bugsUrl = this.repoUrl+ '/issues'
+        this.bugsUrl = this.repoUrl+ '/issues';
 
         cb();
       }.bind(this));
@@ -143,7 +143,7 @@ CommanderGenerator.prototype.askForComponents = function askFor() {
             type: 'checkbox',
             message: 'Additional components to install:',
             choices: [
-              { name: 'Logger (adds a Winston logger)', value: 'logger' },
+              { name: 'Logger (adds a Winston logger, required for config, package, loader, and help components)', value: 'logger' },
               { name: 'Commander loader (automatically loads commands from cmds/ directory)', value: 'loader' },
               { name: 'Autocompletion (adds command line autocompletion)', value: 'completion' },
               { name: 'Package (load reasonable defaults from your application\'s package.json)',value: 'package' },
@@ -157,11 +157,21 @@ CommanderGenerator.prototype.askForComponents = function askFor() {
     this.components = props.components;
 
     this.dependencies = '"commander": "~2.0.0"';
-    if (props.components.length > 0)
-        this.dependencies += ',\n    "autocmdr": "~0.0.4"';
+    if (props.components.length > 0){
+      this.dependencies += ',\n    "autocmdr": "~0.0.7"';
+    }
+
+    var loggerNeeded = props.components.indexOf('config') > -1 ||
+      props.components.indexOf('help') > -1 ||
+      props.components.indexOf('loader') > -1 ||
+      props.components.indexOf('package') > -1;
+
+    if (loggerNeeded && props.components.indexOf('logger') < 0) {
+      props.components.unshift('logger');
+    }
 
     this.components = props.components
-      .map(function(d) { return 'require(\'autocmdr/lib/'+d+'\')(program);' })
+      .map(function(d) { return 'require(\'autocmdr/lib/'+d+'\')(program);'; })
       .join('\n');
 
     this.logger = props.components.indexOf('logger') > -1;
@@ -188,13 +198,13 @@ CommanderGenerator.prototype.readme = function readme() {
 
     var bin = path.join(process.cwd(), './bin/', this.slugname);
 
-    cp.exec('node '+bin+' --help', function (error, stdout, stderr) {
+    cp.exec('node '+bin+' --help', function (error, stdout) {
         this.usage = (error === null) ? stdout : 'node ./bin/'+this.slugname+' --help';
         this.template('Readme.md', 'Readme.md');
         cb();
     }.bind(this));
 
-}
+};
 
 CommanderGenerator.prototype.test = function projectfiles() {
   this.mkdir('test');

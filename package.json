@@ -1,6 +1,6 @@
 {
   "name": "generator-commander",
-  "version": "0.0.8",
+  "version": "0.0.8-rc1",
   "description": "A commander-cli generator for Yeoman",
   "keywords": [
     "yeoman-generator",
