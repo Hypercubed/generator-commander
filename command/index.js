@@ -3,7 +3,7 @@
 var util = require('util');
 var yeoman = require('yeoman-generator');
 
-var CommandGenerator = module.exports = function CommandGenerator(args, options, config) {
+var CommandGenerator = module.exports = function CommandGenerator() {
   yeoman.generators.Base.apply(this, arguments);
 
   this.argument('name', { type: String, required: false });
@@ -26,22 +26,22 @@ CommandGenerator.prototype.askFor = function askFor() {
   console.log(this.yeoman);
 
   var prompts = [
-          {
-            name: 'name',
-            pattern: /^[a-zA-Z0-9\s\-]+$/,
-            message: 'Command name',
-            default: this.name,
-            required: true
-          },
-          { name: 'version', default: '0.0.0', message: 'version' },
-          { name: 'description', default: 'A commander command', message: 'description' }
-        ];
+    {
+      name: 'name',
+      pattern: /^[a-zA-Z0-9\s\-]+$/,
+      message: 'Command name',
+      default: this.name,
+      required: true
+    },
+    { name: 'version', default: '0.0.0', message: 'version' },
+    { name: 'description', default: 'A commander command', message: 'description' }
+  ];
 
   this.prompt(prompts, function (props) {
     util._extend(this, props);
 
     this.slugname =  this._.slugify(props.name);
-    this.args = '\/\* Args here \*\/'
+    this.args = '\/\* Args here \*\/';
     this.code = '\/\/ Your code goes here';
 
     cb();

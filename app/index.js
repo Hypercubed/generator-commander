@@ -167,7 +167,7 @@ CommanderGenerator.prototype.askForComponents = function askFor() {
       props.components.indexOf('package') > -1;
 
     if (loggerNeeded && props.components.indexOf('logger') < 0) {
-      props.components.unshift('logger');
+      props.components.unshift('logger');  // logger must be first
     }
 
     this.components = props.components
