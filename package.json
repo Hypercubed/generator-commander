@@ -15,6 +15,11 @@
     "url": "https://github.com/Hypercubed"
   },
   "main": "app/index.js",
+  "files": [
+    "app",
+    "command",
+    "component"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/Hypercubed/generator-commander.git"
