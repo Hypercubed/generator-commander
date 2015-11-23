@@ -3,8 +3,8 @@
  */
 'use strict';
 
-module.exports = function(program, opts) {
+module.exports = function (program, opts) {
 
 	<%= code %>
-	
+
 };

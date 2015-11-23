@@ -1,7 +1,7 @@
-/*global describe, beforeEach, it*/
+/* global describe, it, before */
 'use strict';
 
-var path    = require('path');
+var path = require('path');
 var helpers = require('yeoman-generator').test;
 
 describe('commander generators', function () {
@@ -12,14 +12,13 @@ describe('commander generators', function () {
       }
 
       done();
-    }.bind(this));
+    });
   });
 
   it('commander:app, with components creates expected files', function (done) {
-
-      this.app = helpers.createGenerator('commander:app', [
-        '../../app'
-      ]);
+    this.app = helpers.createGenerator('commander:app', [
+      '../../app'
+    ]);
 
     var expected = [
       '.jshintrc',
@@ -82,10 +81,9 @@ describe('commander generators', function () {
   }); */
 
   it('commander:command creates expected files', function (done) {
-
-      this.app = helpers.createGenerator('commander:command', [
-        '../../command'
-      ], ['mycmd']);
+    this.app = helpers.createGenerator('commander:command', [
+      '../../command'
+    ], ['mycmd']);
 
     var expected = [
       'cmds/mycmd.js'
@@ -103,10 +101,9 @@ describe('commander generators', function () {
   });
 
   it('commander:component creates expected files', function (done) {
-
-      this.app = helpers.createGenerator('commander:component', [
-        '../../component'
-      ], ['mycomp']);
+    this.app = helpers.createGenerator('commander:component', [
+      '../../component'
+    ], ['mycomp']);
 
     var expected = [
       'lib/mycomp.js'
@@ -121,6 +118,4 @@ describe('commander generators', function () {
       done();
     });
   });
-
 });
-

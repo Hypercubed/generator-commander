@@ -9,8 +9,8 @@ module.exports = function(program) {
 		.command('<%= slugname %>')
 		.version('<%= version %>')
 		.description('<%= description %>')
-		.action(function(<%= args %>){
+		.action(function (<%= args %>) {
 			<%= code %>
 		});
-	
+
 };

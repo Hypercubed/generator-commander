@@ -45,5 +45,10 @@
     {
       "type": "MIT"
     }
-  ]
+  ],
+  "semistandard": {
+    "ignore": [
+      "app/templates/"
+    ]
+  }
 }
